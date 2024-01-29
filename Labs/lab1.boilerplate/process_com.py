@@ -17,6 +17,7 @@ def B(y):
     return total
 
 def main(n = None):
+    global Total 
     Total = 0
 
     # Check for the correct number of command-line arguments
@@ -34,22 +35,25 @@ def main(n = None):
     # Create a child process
     pid = os.fork()
     print("pid=", pid)
-
+    
     # If the fork failed
     if pid < 0:
         print("Fork system call failed")
         return
 
     if pid != 0:  # Parent process
+        num = os.wait()
+        Total = num[1] // 256
         Total += A(x)
+
     else:  # Child process
         Total += B(x)
-        os._exit(0)  # Ensure the child process terminates here
+        os._exit(Total)  # Ensure the child process terminates here
 
     # If this is the parent process, print the total summation
     if pid != 0:
         print(f"The total is: {Total}")
 
 if __name__ == "__main__":
-    n = 1
+    n = 10
     main(n)

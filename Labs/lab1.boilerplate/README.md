@@ -1,0 +1,3 @@
+1. The program is returning incorrect computation because when the fork is called for the child process, the child has its own set of data in the variables. 
+Once the child process computes the would be correct answer 1, then once the system tells it to exit, the variable in that is gone and isn't updated in the parent process.
+2. The data from the child was not returned to the parent process so instead I sent it back as the exit status. Once the child process is done, the wait command returns the process exit code as a 16 bit so we had to divide it by 256
