@@ -55,5 +55,5 @@ def main(n = None):
         print(f"The total is: {Total}")
 
 if __name__ == "__main__":
-    n = 10
+    n=45
     main(n)

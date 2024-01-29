@@ -1,3 +1,5 @@
 1. The program is returning incorrect computation because when the fork is called for the child process, the child has its own set of data in the variables. 
 Once the child process computes the would be correct answer 1, then once the system tells it to exit, the variable in that is gone and isn't updated in the parent process.
 2. The data from the child was not returned to the parent process so instead I sent it back as the exit status. Once the child process is done, the wait command returns the process exit code as a 16 bit so we had to divide it by 256
+3. After 25, it starts to have an error. At 26, it returns 95 instead of 351. This is due to how I transfer the data of the child node back to the parent node. Since os.wait returns a 16 bit integer, at 25, the exit code returns 63232. At 26, the sum becomes too much and then it returns 1024. 
+4. When we switch the process, it starts to have an error at 45. 
